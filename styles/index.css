@@ -1,0 +1,95 @@
+/* General Page Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+    margin: 0;
+    padding: 20px 0px;
+    color: #333;
+}
+
+/* Heading */
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+}
+
+/* Wrapper */
+.wrapper {
+    margin-top: 90px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0px;
+}
+
+/* Grid Layout */
+.grid-container {
+    margin-top: 80px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+/* Post Card */
+.post {
+    background-color: #fff;
+    border-left: 5px solid #3498db;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.post:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Title */
+.title {
+    font-size: 1.4em;
+    font-weight: 600;
+    color: #34495e;
+    margin-bottom: 10px;
+}
+
+/* Meta Info */
+.meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+.author {
+    color: #555;
+}
+
+.time {
+    color: #999;
+}
+
+/* Content Preview */
+.content {
+    font-size: 1em;
+    line-height: 1.5;
+    color: #444;
+}
+
+
+
+/* Responsive */
+@media (max-width: 640px) {
+    .title {
+        font-size: 1.2em;
+    }
+
+    .post {
+        padding: 15px;
+    }
+
+    .meta {
+        flex-direction: column;
+        gap: 4px;
+    }
+}

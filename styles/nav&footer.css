@@ -1,0 +1,138 @@
+/* General Page Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+    margin: 0;
+    padding: 0px 0;
+    color: #333;
+}
+
+/* Heading */
+h1 {
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 30px;
+    font-size: xx-large;
+}
+
+/* Wrapper */
+.wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #2c3e50;
+    padding: 15px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    color: #ecf0f1;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #3498db;
+}
+
+/* Grid Layout */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+/* Post Card */
+.post {
+    background-color: #fff;
+    border-left: 5px solid #3498db;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.post:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Title */
+.title {
+    font-size: 1.4em;
+    font-weight: 600;
+    color: #34495e;
+    margin-bottom: 10px;
+}
+
+/* Meta Info */
+.meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+.author {
+    color: #555;
+}
+
+.time {
+    color: #999;
+}
+
+/* Content Preview */
+.content {
+    font-size: 1em;
+    line-height: 1.5;
+    color: #444;
+}
+
+/* Footer */
+.footer {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 40px;
+    font-size: 0.9em;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .title {
+        font-size: 1.2em;
+    }
+
+    .post {
+        padding: 15px;
+    }
+
+    .meta {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-links li {
+        margin: 5px 0;
+    }
+}
