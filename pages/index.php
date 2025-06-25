@@ -40,7 +40,7 @@ include "../database/db_connection.php";
                         <div style="display:flex;justify-content:space-between;align-items:baseline;">
 
                             <p class="content">
-                                <?php echo htmlspecialchars(substr($row["content"], 0, 100)); ?>...
+                                <?php echo htmlspecialchars(substr($row["content"], 0, 16)); ?>...
                             </p>
                             <a  href="./blogs.php?id=<?= $row["id"]?>" >Read more</a>
 

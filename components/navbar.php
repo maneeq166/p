@@ -13,7 +13,7 @@
     <ul class="nav-links">
       <li><a href="../pages/index.php">Home</a></li>
       <li><a href="../pages/blogCreate.php">Create</a></li>
-      <!-- <li><a href="#">About</a></li> -->
+      <li><a href="../pages/register.php">Register</a></li>
       <!-- <li><a href="#">Contact</a></li> --> 
     </ul>
   </div>

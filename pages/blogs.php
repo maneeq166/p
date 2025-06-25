@@ -3,7 +3,7 @@ include "../database/db_connection.php";
 
 $id = isset($_GET["id"]) ? (int) $_GET["id"] : 0;
 
-$sql = "SELECT posts.title, posts.content, posts.created_at, users.username 
+$sql = "SELECT posts.title, posts.content, posts.created_at, posts.image, users.username 
         FROM posts 
         JOIN users ON posts.user_id = users.id 
         WHERE posts.id = $id";
@@ -14,12 +14,14 @@ if ($row = mysqli_fetch_assoc($result)) {
     $title = $row['title'];
     $content = $row['content'];
     $author = $row['username'];
+    $image = $row['image'];
     $created_at = substr($row['created_at'], 0, 10);
 } else {
     $title = "Blog Not Found";
     $content = "";
     $author = "";
     $created_at = "";
+    $image="";
 }
 
 mysqli_close($conn);
@@ -44,6 +46,9 @@ mysqli_close($conn);
         <?php endif; ?>
 
         <div class="content">
+            <?php if($image): ?>
+                    <img src="../uploads/<?php echo $image; ?>" alt="Blog Image" >
+                <?php endif ?>
             <?php echo htmlspecialchars($content); ?>
         </div>
     </div>
