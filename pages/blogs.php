@@ -47,7 +47,7 @@ mysqli_close($conn);
 
         <div class="content">
             <?php if($image): ?>
-                    <img src="../uploads/<?php echo $image; ?>" alt="Blog Image" >
+                    <img src="<?php echo $image; ?>" alt="Blog Image" >
                 <?php endif ?>
             <?php echo htmlspecialchars($content); ?>
         </div>
