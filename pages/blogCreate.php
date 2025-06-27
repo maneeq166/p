@@ -1,15 +1,6 @@
 <?php
 session_start();
-require_once "../env/loadenv.php";
-loadEnv('C:/Nxamp/htdocs/BlogLikho/env/.env');
 include "../database/db_connection.php";
-
-$img_api_key = $_ENV["IMGBB_API_KEY"];
-
-if (!isset($_ENV["IMGBB_API_KEY"])) {
-    die("IMGBB API key not loaded from .env");
-}
-
 
 if (!isset($_SESSION['user_id'])) {
     die("User not logged in.");
@@ -19,44 +10,44 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $header = $_POST['header'];
     $content = $_POST['content'];
     $user_id = $_SESSION['user_id'];
-    $image_url = null; // default is NULL if no image
+    $image_name = null; // default is NULL if no image
 
     // Only process image if uploaded
     if (isset($_FILES["image"]) && $_FILES["image"]["error"] === 0) {
+        $target_dir = "../uploads/";
+        $image_name = basename($_FILES["image"]["name"]);
+        $target_file = $target_dir . $image_name;
+        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+        $uploadOk = 1;
 
-        $imageFileType = strtolower(pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION));
+        // Check file type
         $allowed_types = ['jpg', 'jpeg', 'png', 'gif'];
-
         if (!in_array($imageFileType, $allowed_types)) {
-            $error = "Only JPG, JPEG, PNG, GIF files allowed.";
-        } elseif ($_FILES["image"]["size"] > 500000) {
-            $error = "Image too large (limit 500KB).";
-        } else {
-            $image = $_FILES['image']['tmp_name'];
-            $image_data = base64_encode(file_get_contents($image));
-            $url = "https://api.imgbb.com/1/upload?key=$img_api_key";
-            $data = ['image' => $image_data];
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_POST, 1);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            $response = curl_exec($ch);
-            curl_close($ch);
-
-            $result = json_decode($response, true);
-
-            if (isset($result['data']['url'])) {
-                $image_url = $result['data']['url'];
-            } else {
-                echo "<pre>";
-                print_r($result);
-                echo "</pre>";
-                exit;
-
-            }
+            echo "<script>alert('Only JPG, JPEG, PNG, GIF files allowed.');</script>";
+            $uploadOk = 0;
         }
 
+        // Size check
+        if ($_FILES["image"]["size"] > 500000) {
+            echo "<script>alert('Image too large (limit 500KB).');</script>";
+            $uploadOk = 0;
+        }
+
+        // File exists check
+        if (file_exists($target_file)) {
+            echo "<script>alert('File already exists.');</script>";
+            $uploadOk = 0;
+        }
+
+        // Upload image
+        if ($uploadOk === 1) {
+            if (!move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+                echo "<script>alert('Image upload failed.');</script>";
+                $image_name = null; // fallback to null
+            }
+        } else {
+            $image_name = null; // fallback to null
+        }
     }
 
     // Final insert
@@ -64,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         $sql = "INSERT INTO posts (user_id, title, content, image) VALUES (?, ?, ?, ?)";
         $stmt = mysqli_prepare($conn, $sql);
         if ($stmt) {
-            mysqli_stmt_bind_param($stmt, "isss", $user_id, $header, $content, $image_url);
+            mysqli_stmt_bind_param($stmt, "isss", $user_id, $header, $content, $image_name);
             if (mysqli_stmt_execute($stmt)) {
                 echo "<script>alert('Blog Posted Successfully!'); window.location.href='index.php';</script>";
             } else {
@@ -88,17 +79,49 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     <link rel="stylesheet" href="../styles/blogCreate.css">
     <title>Document</title>
 </head>
+<script>
+function previewImage(event) {
+    const input = event.target;
+    const preview = document.getElementById('imagePreview');
+
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            preview.src = e.target.result;
+            preview.style.display = 'block';
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    } else {
+        preview.src = '';
+        preview.style.display = 'none';
+    }
+}
+</script>
+
 
 <body>
     <div>
-        <form method="POST" enctype="multipart/form-data">
+   <form method="POST" enctype="multipart/form-data">
+    <label for="imageInput">Upload Image</label>
+    <input type="file" name="image" id="imageInput" accept="image/*" onchange="previewImage(event)">
 
-            <input type="file" name="image" id="imageInput">
-            <input class="heading" name="header" placeholder="header for your blog.." type="text" required>
-            <textarea name="content" cols="80" rows="100" id="contents" placeholder="write some content...."
-                required></textarea>
-            <button type="submit">Submit Your Blog</button>
-        </form>
+    <!-- Preview container -->
+    <div id="imagePreviewContainer">
+        <img id="imagePreview" alt="Image preview will appear here" />
+    </div>
+
+    <label for="header">Blog Title</label>
+    <input class="heading" name="header" id="header" placeholder="Enter blog title" type="text" required>
+
+    <label for="contents">Content</label>
+    <textarea name="content" id="contents" placeholder="Write your blog content..." required></textarea>
+
+    <button type="submit">Submit Your Blog</button>
+</form>
+
+
     </div>
 </body>
 

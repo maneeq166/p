@@ -32,10 +32,12 @@ mysqli_close($conn);
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="/BlogLikho/styles/blog.css" />
+
     <title><?php echo htmlspecialchars($title); ?> | BlogLikho</title>
-    <link rel="stylesheet" href="../styles/blog.css" />
 </head>
 <body>
+    
     <div class="container">
         <h1 class="title"><?php echo htmlspecialchars($title); ?></h1>
 
@@ -47,7 +49,7 @@ mysqli_close($conn);
 
         <div class="content">
             <?php if($image): ?>
-                    <img src="<?php echo $image; ?>" alt="Blog Image" >
+                    <img src="../uploads/<?php echo $image; ?>" alt="Blog Image" >
                 <?php endif ?>
             <?php echo htmlspecialchars($content); ?>
         </div>
