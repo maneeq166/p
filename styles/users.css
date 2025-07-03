@@ -1,0 +1,75 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f6f9;
+  margin: 0;
+  padding: 0px;
+  color: #333;
+}
+
+a {
+  text-decoration: none;
+  color: currentColor;
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  margin-top: 20px;
+}
+
+/* Flex wrapper */
+.users-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* Individual User Card */
+.user-card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  width: 320px;
+  transition: transform 0.2s;
+  overflow-x: hidden;
+}
+
+.user-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Profile Picture Placeholder */
+.user-pfp {
+  width: 60px;
+  height: 60px;
+  background-color: #d0d0d0;
+  border-radius: 50%;
+  margin-right: 15px;
+  flex-shrink: 0;
+}
+
+.user-info-wrapper {
+  width: 215px;
+  overflow: hidden;
+}
+
+.user-info {
+  text-align: center;
+}
+
+/* Text */
+.user-info h1 {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+.user-info p {
+  color: #666;
+  font-size: 0.95rem;
+}

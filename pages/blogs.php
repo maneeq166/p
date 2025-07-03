@@ -21,7 +21,7 @@ if ($row = mysqli_fetch_assoc($result)) {
     $content = "";
     $author = "";
     $created_at = "";
-    $image="";
+    $image = "";
 }
 
 mysqli_close($conn);
@@ -29,16 +29,23 @@ mysqli_close($conn);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/BlogLikho/styles/blog.css" />
 
     <title><?php echo htmlspecialchars($title); ?> | BlogLikho</title>
 </head>
+
 <body>
-    
+    <button>
+        <a href="../pages/index.php">
+            Back to home
+        </a>
+    </button>
     <div class="container">
+
         <h1 class="title"><?php echo htmlspecialchars($title); ?></h1>
 
         <?php if ($author): ?>
@@ -48,11 +55,12 @@ mysqli_close($conn);
         <?php endif; ?>
 
         <div class="content">
-            <?php if($image): ?>
-                    <img src="../uploads/<?php echo $image; ?>" alt="Blog Image" >
-                <?php endif ?>
+            <?php if ($image): ?>
+                <img src="../uploads/<?php echo $image; ?>" alt="Blog Image">
+            <?php endif ?>
             <?php echo htmlspecialchars($content); ?>
         </div>
     </div>
 </body>
+
 </html>

@@ -14,7 +14,7 @@
       <li><a href="../pages/index.php">Home</a></li>
       <li><a href="../pages/blogCreate.php">Create</a></li>
       <li><a href="../pages/register.php">Register</a></li>
-      <!-- <li><a href="#">Contact</a></li> --> 
+      <li><a href="../pages/users.php">Users</a></li> 
     </ul>
   </div>
 </nav>
