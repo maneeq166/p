@@ -3,12 +3,12 @@
 <?php
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST["username"];
+     $username = $_POST["username"];
     $email = $_POST["email"];
     $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
     $checkEmail = "SELECT * FROM users WHERE email=?";
-
+ 
     $checkStmt = mysqli_prepare($conn, $checkEmail);
 
     if ($checkStmt) {

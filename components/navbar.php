@@ -9,10 +9,17 @@
 <body>
     <nav class="navbar">
   <div class="wrapper">
-    <h1>BlogLikho</h1>
+    <div style="display:flex;justify-content:space-between;align-items:baseline;color:white;">
+      <h1>BlogLikho</h1>
+      <p>
+  Want to Signin as 
+  <a style="hover:underline;text-decoration:none;" href="../pages/admin/admin-signup.php">Admin?</a>
+</p>
+
+    </div>
     <ul class="nav-links">
       <li><a href="../pages/index.php">Home</a></li>
-      <li><a href="../pages/blogCreate.php">Create</a></li>
+      <li><a href="../pages/blog-create.php">Create</a></li>
       <li><a href="../pages/users.php">Users</a></li> 
       <li><a href="../pages/register.php">Register</a></li>
       <li><a href="../pages/login.php">Login</a></li>

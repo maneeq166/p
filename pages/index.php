@@ -17,7 +17,10 @@ include "../database/db_connection.php";
     <?php include '../components/navbar.php'; ?>
     <div class="wrapper">
 
+    <div style="position:relative;display:flex;justify-center;">
 
+        <input style="position:absolute;right:50px;oadding:20px" type="text">
+    </div>
 
         <div class="grid-container">
             <?php
@@ -31,6 +34,7 @@ include "../database/db_connection.php";
             if (mysqli_num_rows($result) > 0):
                 while ($row = mysqli_fetch_assoc($result)):
                     ?>
+                
                     <div class="post">
                         <p class="title"><?php echo htmlspecialchars($row["title"]); ?></p>
                         <div class="meta">

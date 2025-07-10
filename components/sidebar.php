@@ -5,7 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Sidebar</title>
-  <link rel="stylesheet" href="../styles/adminSidebar.css">
+  <link rel="stylesheet" href="/BlogLikho/styles/adminSidebar.css">
+
 </head>
 <body>
 
