@@ -13,7 +13,7 @@
       <h1>BlogLikho</h1>
       <p>
   Want to Signin as 
-  <a style="hover:underline;text-decoration:none;" href="../pages/admin/admin-signup.php">Admin?</a>
+  <a class="admin-link"  href="../pages/admin/admin-signup.php">Admin?</a>
 </p>
 
     </div>

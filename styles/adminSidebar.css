@@ -1,36 +1,36 @@
-/* admin-sidebar.css */
-
-body {
-  margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
+/* Sidebar Styling */
 .sidebar {
-  width: 220px;
+  width: 250px;
   height: 100vh;
-  background-color: #1e1e2f;
-  color: white;
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  padding: 30px 20px;
   position: fixed;
-  padding: 20px 15px;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.logo {
-  margin: 0;
+/* Logo */
+.sidebar .logo {
   font-size: 24px;
-  text-align: center;
-  color: #fff;
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
-.subtitle {
-  text-align: center;
+/* Subtitle */
+.sidebar .subtitle {
   font-size: 14px;
-  color: #999;
+  color: #bdc3c7;
   margin-bottom: 30px;
 }
 
+/* Navigation Links */
 .nav-links {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .nav-links li {
@@ -38,19 +38,45 @@ body {
 }
 
 .nav-links a {
+  color: #ecf0f1;
   text-decoration: none;
-  color: white;
-  padding: 10px 15px;
+  font-weight: 500;
   display: block;
+  padding: 10px 15px;
   border-radius: 8px;
-  transition: 0.3s;
+  transition: background 0.3s ease;
 }
 
-.nav-links a:hover,
+.nav-links a:hover {
+  background-color: #34495e;
+}
+
+/* Logout Button */
+.nav-links .logout {
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+.nav-links .logout:hover {
+  background-color: #c0392b;
+}
+
+/* Active Link (Optional) */
 .nav-links a.active {
-  background-color: #31314d;
+  background-color: #1abc9c;
+  color: #fff;
 }
 
-.logout {
-  color: #ff5555;
+/* Responsive (optional collapse later) */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+  .nav-links {
+    display: flex;
+    flex-direction: column;
+  }
 }
