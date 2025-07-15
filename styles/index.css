@@ -16,7 +16,7 @@ h1 {
 
 /* Wrapper */
 .wrapper {
-    margin-top: 90px;
+    margin-top: 0px;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0px;
@@ -24,7 +24,7 @@ h1 {
 
 /* Grid Layout */
 .grid-container {
-    margin-top: 80px;
+    margin-top: 10px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;

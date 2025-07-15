@@ -46,7 +46,7 @@ $blogData = mysqli_fetch_assoc($blogResult);
         }
 
         .dashboard-container {
-            margin-left: 250px;
+            margin-left:300px;
             padding: 30px;
         }
 

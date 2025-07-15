@@ -38,7 +38,7 @@ $usersResult = mysqli_query($conn, "SELECT * FROM users");
         }
 
         .container {
-            margin-left: 250px;
+            margin-left: 300px;
             padding: 30px;
         }
 
@@ -64,6 +64,8 @@ $usersResult = mysqli_query($conn, "SELECT * FROM users");
             background-color: #1abc9c;
             color: white;
         }
+
+        
 
         a.button {
             padding: 6px 10px;
@@ -141,7 +143,7 @@ $usersResult = mysqli_query($conn, "SELECT * FROM users");
                 <?php while ($user = mysqli_fetch_assoc($usersResult)): ?>
                     <tr>
                         <td>
-                            <a href="admin-user-blogs.php?user_id=<?= $user['id']; ?>">
+                            <a href="admin-users-blogs.php?user_id=<?= $user['id']; ?>">
                                 <?= $user['id']; ?>
                             </a>
                         </td>
@@ -151,7 +153,7 @@ $usersResult = mysqli_query($conn, "SELECT * FROM users");
                                 <input type="text" name="username" value="<?= htmlspecialchars($user['username']); ?>"
                                 required>
                                 <input type="submit" name="edit_user" value="Update">
-                                <a href="admin-user-blogs.php?user_id=<?= $user['id']; ?>">
+                                <a class="button blogs" href="admin-users-blogs.php?user_id=<?= $user['id']; ?>">
                                     blogs
                                 </a>
                             </form>

@@ -3,25 +3,27 @@ include "../../database/db_connection.php";
 
 $id = isset($_GET["user_id"]) ? (int) $_GET["user_id"] : 0;
 
-$sql = "SELECT posts.title, posts.content, posts.created_at, posts.image, users.username 
+if (isset($_GET['delete_id'])) {
+  $deleteId = (int) $_GET['delete_id'];
+  mysqli_query($conn, "DELETE FROM posts WHERE id = $deleteId");
+  header("Location: admin-users-blogs.php?user_id=" . $id);
+  exit;
+}
+
+$sql = "SELECT posts.id, posts.title, posts.content, posts.created_at, posts.image, users.username 
         FROM posts 
         JOIN users ON posts.user_id = users.id 
         WHERE posts.user_id = $id";
 
 $result = mysqli_query($conn, $sql);
 
-if ($row = mysqli_fetch_assoc($result)) {
-    $title = $row['title'];
-    $content = $row['content'];
-    $author = $row['username'];
-    $image = $row['image'];
-    $created_at = substr($row['created_at'], 0, 10);
+$blogs = [];
+if ($result && mysqli_num_rows($result) > 0) {
+  while ($row = mysqli_fetch_assoc($result)) {
+    $blogs[] = $row;
+  }
 } else {
-    $title = "Blog Not Found";
-    $content = "";
-    $author = "";
-    $created_at = "";
-    $image = "";
+  $no_blogs = true;
 }
 
 mysqli_close($conn);
@@ -29,6 +31,7 @@ mysqli_close($conn);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <title>Admin - View Blog</title>
@@ -47,7 +50,7 @@ mysqli_close($conn);
       margin: 30px auto;
       background-color: #fff;
       border-radius: 12px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
       padding: 30px;
     }
 
@@ -88,24 +91,45 @@ mysqli_close($conn);
     .back-link:hover {
       text-decoration: underline;
     }
+
+    .delete-link {
+      display: inline-block;
+      margin-bottom: 15px;
+      color: red;
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    .delete-link:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
+
 <body>
 
   <div class="blog-container">
-    <div class="blog-title"><?= htmlspecialchars($title); ?></div>
-    <?php if ($author): ?>
-      <div class="blog-meta">By <strong><?= htmlspecialchars($author); ?></strong> | <?= htmlspecialchars($created_at); ?></div>
+    <?php if (!empty($blogs)): ?>
+      <?php foreach ($blogs as $blog): ?>
+        <div class="blog-title"><?= htmlspecialchars($blog['title']); ?></div>
+        <a class="delete-link" href="admin-users-blogs.php?user_id=<?= $id ?>&delete_id=<?= $blog['id'] ?>" onclick="return confirm('Are you sure you want to delete this blog?');">Delete</a>
+        <div class="blog-meta">
+          By <strong><?= htmlspecialchars($blog['username']); ?></strong> |
+          <?= htmlspecialchars(substr($blog['created_at'], 0, 10)); ?>
+        </div>
+        <?php if (!empty($blog['image'])): ?>
+          <img src="/BlogLikho/uploads/<?= htmlspecialchars($blog['image']); ?>" class="blog-image" alt="Blog Image">
+        <?php endif; ?>
+        <div class="blog-content"><?= nl2br(htmlspecialchars($blog['content'])); ?></div>
+        <hr style="margin: 40px 0; border: 1px solid #eee;">
+      <?php endforeach; ?>
+    <?php else: ?>
+      <div class="blog-title">No Blogs Found</div>
     <?php endif; ?>
-
-    <?php if (!empty($image)): ?>
-      <img src="/BlogLikho/uploads/<?= htmlspecialchars($image); ?>" alt="Blog Image" class="blog-image">
-    <?php endif; ?>
-
-    <div class="blog-content"><?= nl2br(htmlspecialchars($content)); ?></div>
 
     <a href="admin-users.php" class="back-link">← Back to Users</a>
   </div>
 
 </body>
+
 </html>
